@@ -1,0 +1,1 @@
+bad_traffic = 0.05

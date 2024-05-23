@@ -1,4 +1,5 @@
 import pandas as pd
+from vars import bad_traffic
 
 # Функция для чтения данных из CSV и нахождения суммы наибольших значений в каждой строке
 def sum_max_values(csv_file):
@@ -6,7 +7,7 @@ def sum_max_values(csv_file):
     df = pd.read_csv(csv_file)
     
     # Список для хранения максимальных значений
-    max_values = []
+    values = []
     
     # Обход всех строк, кроме последней
     for i in range(len(df) - 1):
@@ -16,13 +17,13 @@ def sum_max_values(csv_file):
         # Проверка, в какой колонке находится максимальное значение
         if max_value == row.iloc[0]:
             # Если максимальное значение в первой колонке, записываем значение первой колонки из следующей строки
-            max_values.append(df.iloc[i + 1, 0])
+            values.append(df.iloc[i + 1, 0])
         else:
             # Иначе записываем максимальное значение за вычетом 5%
-            max_values.append(max_value * 0.95)
+            values.append(max_value * (1 - bad_traffic))
     
     # Суммирование всех записанных значений
-    total_sum = sum(max_values)
+    total_sum = round(sum(values), 2)
     
     return total_sum
 
