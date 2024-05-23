@@ -1,14 +1,11 @@
 import pandas as pd
 
-# Функция для чтения данных из CSV и нахождения суммы наибольших значений в каждой строке
 def sum_max_values_percent(csv_file):
-    # Чтение CSV-файла в DataFrame
     df = pd.read_csv(csv_file)
     
     # Список для хранения значений
     values = []
     
-    # Обход всех строк, кроме последней
     for i in range(len(df) - 1):
         row = df.iloc[i]
         max_value = row.max()
@@ -24,7 +21,7 @@ def sum_max_values_percent(csv_file):
                 # Если максимальное значение отклоняется не более чем на 5%, берем значение из следующей строки первой колонки
                 values.append(df.iloc[i + 1, 0])
             else:
-                # Иначе записываем максимальное значение
+                # Иначе записываем максимальное значение за вычетом 5%
                 values.append(max_value * 0.95)
     
     # Суммирование всех записанных значений
